@@ -1,36 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <title>Password Protected</title>
+  <meta charset="UTF-8">
+  <title>Login</title>
 </head>
-<body>
+<body style="text-align:center; margin-top:100px; font-family:sans-serif;">
 
-<h2>Enter Password</h2>
+<h2>mysecret123</h2>
 
-<input type="password" id="pw">
-<button onclick="checkPassword()">Enter</button>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<input type="password" id="pw" placeholder="Password">
+<button onclick="login()">Enter</button>
 
 <script>
-const supabase = window.supabase.createClient(
-  "https://cojvgiebmsmduuexvxqe.supabase.co/rest/v1/",
-  "eyJhbGciOiJI..."
-);
+function login() {
+  const password = document.getElementById("pw").value;
 
-async function checkPassword() {
-  const inputPw = document.getElementById("pw").value;
-
-  const { data } = await supabase
-    .from("site_password")
-    .select("password")
-    .eq("id", 1)
-    .single();
-
-  if (inputPw === data.password) {
+  if (password === "mysecret123") {
     window.location.href = "home.html";
   } else {
-    alert("Wrong password");
+    alert("パスワードが違います");
   }
 }
 </script>
