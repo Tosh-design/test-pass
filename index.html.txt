@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Password Protected</title>
+</head>
+<body>
+
+<h2>Enter Password</h2>
+
+<input type="password" id="pw">
+<button onclick="checkPassword()">Enter</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabase = window.supabase.createClient(
+  "https://cojvgiebmsmduuexvxqe.supabase.co/rest/v1/",
+  "eyJhbGciOiJI..."
+);
+
+async function checkPassword() {
+  const inputPw = document.getElementById("pw").value;
+
+  const { data } = await supabase
+    .from("site_password")
+    .select("password")
+    .eq("id", 1)
+    .single();
+
+  if (inputPw === data.password) {
+    window.location.href = "home.html";
+  } else {
+    alert("Wrong password");
+  }
+}
+</script>
+
+</body>
+</html>
